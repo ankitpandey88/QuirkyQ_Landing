@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quirky - Online Booking</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ecedff, #a9c0d1);
+            color: #002D62;
+        }
+
+        header {
+            padding: 30px;
+            background: #002D62;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            font-size: 1.2em;
+        }
+
+        main {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        main h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #002D62;
+        }
+
+        main p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: linear-gradient(135deg, #002D62, #00509e);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            padding: 20px;
+            background: #002D62;
+            color: white;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 3px solid #002D62;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+            z-index: 1000;
+            animation: popup-show 0.5s ease;
+        }
+
+        #popup h2 {
+            margin: 0 0 15px;
+            font-size: 1.8em;
+            color: #002D62;
+        }
+
+        #popup p {
+            margin: 0 0 20px;
+            font-size: 1.2em;
+            color: #444;
+        }
+
+        @keyframes popup-show {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .contact {
+            margin-top: 30px;
+            font-size: 1.2em;
+            color: #002D62;
+        }
+
+        .contact p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Welcome to QuirkyQ</h1>
+        <p>Your one-stop solution for Salon, Doctor, and Parlor bookings!</p>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <h2>Why Choose QuirkyQ?</h2>
+        <p>
+            We make your life easier by offering a seamless online booking platform for salons, doctors, and parlors.
+            Book your appointments in just a few clicks and enjoy hassle-free services.
+        </p>
+
+        <button>Get Started</button>
+
+        <div class="contact">
+            <p>Contact us at:</p>
+            <p>Phone: +91 70143 62177</p>
+            <p>Email: sahil.little02@gmail.com</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 QuirkyQ. All rights reserved.</p>
+    </footer>
+
+    <!-- Popup -->
+    <div id="popup">
+        <h2>Under Development</h2>
+        <p>Our product is under development and will launch soon. Stay tuned!</p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        // Show popup after 5 seconds
+        setTimeout(function() {
+            document.getElementById('popup').style.display = 'block';
+        }, 5000);
+
+        // Close popup
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
