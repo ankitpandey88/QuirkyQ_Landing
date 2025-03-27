@@ -21,31 +21,9 @@ import Apporaval from "./components/Apporaval";
 import AdminLogin from "./auth/AdminLogin";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import AdminService from "./components/admin/AdminService";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
-// const App = () => {
-//   return (
-//     <AuthProvider>
-//       <BrowserRouter>
-//         <ToastContainer autoClose={1800} />
-//         <Routes>
-//           <Route path="/" element={<Navigate to="/quirkyQ" replace />} />
-//           <Route path="/login" element={<Login />} />
-//           <Route path="/signup" element={<Signup />} />
-//           <Route path="/professional" element={<VendorOnboard />} />
-//           <Route path="/quirkyQ" element={<LandingPage />} />
-//           <Route path="/contact-us" element={<ContactUs />} />
-          
-//           {/* ✅ Apply Protected Route to these pages */}
-//           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-//           <Route path="/salon" element={<ProtectedRoute><Salon /></ProtectedRoute>} />
-//           <Route path="/salon/:id" element={<ProtectedRoute><SalonDetails /></ProtectedRoute>} />
-//           <Route path="/doctor" element={<ProtectedRoute><Doctor /></ProtectedRoute>} />
-//           <Route path="/doctors/:id" element={<ProtectedRoute><DocterDetails /></ProtectedRoute>} />
-//         </Routes>
-//       </BrowserRouter>
-//     </AuthProvider>
-//   );
-// };
+
 
 const App = () => {
   return (
@@ -67,6 +45,7 @@ const App = () => {
             <Route path="/salon/:id" element={<SalonDetails />} />
             <Route path="/doctor" element={<Doctor />} />
             <Route path="/doctors/:id" element={<DocterDetails />} />
+            <Route path="/Privacy-policy" element={<PrivacyPolicy />} />
 
             {/* ✅ Apply Protected Route to these pages */}
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
