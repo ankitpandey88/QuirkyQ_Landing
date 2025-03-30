@@ -22,6 +22,10 @@ import AdminLogin from "./auth/AdminLogin";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import AdminService from "./components/admin/AdminService";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import About from "./components/About";
+import TermsAndConditions from "./components/TerrmAndCondition";
+import ContentPolicy from "./components/ContentPolicy";
+import CancellationAndRefund from "./components/CancellationAndRefund";
 
 
 
@@ -46,6 +50,10 @@ const App = () => {
             <Route path="/doctor" element={<Doctor />} />
             <Route path="/doctors/:id" element={<DocterDetails />} />
             <Route path="/Privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/TermsAndCondition" element={<TermsAndConditions />} />
+            <Route path="/Content-policy" element={<ContentPolicy />} />
+            <Route path="/CancellationAnd-Refund" element={<CancellationAndRefund/>} />
+            <Route path="/about" element={<About />} />
 
             {/* ✅ Apply Protected Route to these pages */}
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
