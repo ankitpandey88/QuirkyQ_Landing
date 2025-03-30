@@ -256,6 +256,9 @@ const Footer = () => {
             <Link to="/CancellationAnd-Refund" className="text-purple-400 hover:text-purple-300 transition duration-300">
               Cancellation & Refund
             </Link>
+            <Link to="/ShippingAndDelivery" className="text-purple-400 hover:text-purple-300 transition duration-300">
+            Shipping And Delivery
+            </Link>
           </div>
         </div>
       </div>

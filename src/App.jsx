@@ -26,6 +26,7 @@ import About from "./components/About";
 import TermsAndConditions from "./components/TerrmAndCondition";
 import ContentPolicy from "./components/ContentPolicy";
 import CancellationAndRefund from "./components/CancellationAndRefund";
+import ShippingAndDelivery from "./components/ShippingAndDelivery";
 
 
 
@@ -54,6 +55,8 @@ const App = () => {
             <Route path="/Content-policy" element={<ContentPolicy />} />
             <Route path="/CancellationAnd-Refund" element={<CancellationAndRefund/>} />
             <Route path="/about" element={<About />} />
+            <Route path="/ShippingAndDelivery" element={<ShippingAndDelivery />} />
+
 
             {/* ✅ Apply Protected Route to these pages */}
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
