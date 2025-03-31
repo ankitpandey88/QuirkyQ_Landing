@@ -1,11 +1,12 @@
 import React from 'react';
 import Navbar from '../pages/Navbar';
 import Footer from './Footer';
+import Header from './Header';
 
 const ContentPolicy = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-      <Navbar />
+      <Header />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 pt-32">
         <div className="text-center mb-16">
