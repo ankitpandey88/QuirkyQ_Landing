@@ -59,7 +59,7 @@ const Salon = () => {
       console.error('Invalid salon ID');
       return;
     }
-    navigate(`/salon-details/${id}`); // Changed to more standard URL pattern
+    navigate(`/salon/${id}`); // Changed to more standard URL pattern
   };
 
   return (
@@ -79,7 +79,7 @@ const Salon = () => {
             Discover <span className="text-purple-400">Top Salons</span>
           </h1>
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/quirkyQ")}
             className="flex items-center bg-gray-700 hover:bg-gray-600 text-gray-200 px-4 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-lg"
           >
             <FaArrowLeft className="mr-2" /> Back
