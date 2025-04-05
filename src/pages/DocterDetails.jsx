@@ -111,39 +111,103 @@ const DoctorDetails = () => {
     await createBooking();
   };
 
+  // const createBooking = async () => {
+  //   const bookingData = {
+  //     name: name,
+  //     email: email,
+  //     doctorId: id,
+  //     doctorName: doctor.enterprise_name,
+  //     services: selectedServices.map(service => ({
+  //       name: service.service_name,
+  //       price: service.service_price
+  //     })),
+  //     date: selectedDate,
+  //     time: selectedTime,
+  //     totalAmount: totalAmount,
+  //     paymentMethod: paymentMethod
+  //   };
+
+  //   try {
+  //     const response = await axios.post(
+  //       'https://quirky-backend.vercel.app/api/booking-email',
+  //       bookingData,
+  //       { headers: { 'Content-Type': 'application/json' } }
+  //     );
+
+  //     if (response.data.message === "Booking confirmation email sent!") {
+  //       toast.success('Booking confirmed! Confirmation sent to your email.');
+        
+  //       if (paymentMethod === 'online') {
+  //         // Proceed to online payment
+  //         handlePayment();
+  //       } else {
+  //         // For store payment, redirect after delay
+  //         setTimeout(() => {
+  //           navigate('/doctor');
+  //         }, 2000);
+  //       }
+  //     } else {
+  //       toast.error(response.data.message || 'Booking failed. Please try again.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Booking error:', error);
+  //     toast.error(error.response?.data?.message || 'Booking failed. Please try again.');
+  //   }
+  // };
+
+
   const createBooking = async () => {
     const bookingData = {
       name: name,
       email: email,
       doctorId: id,
       doctorName: doctor.enterprise_name,
+      date: selectedDate,
+      time: selectedTime,
+      paymentMethod: paymentMethod,
+      totalAmount: totalAmount,
       services: selectedServices.map(service => ({
         name: service.service_name,
         price: service.service_price
-      })),
-      date: selectedDate,
-      time: selectedTime,
-      totalAmount: totalAmount,
-      paymentMethod: paymentMethod
+      }))
     };
-
+  
     try {
       const response = await axios.post(
-        'https://quirky-backend.vercel.app/api/booking-email',
+        'https://quirky-backend.vercel.app/api/doctor-bookings-details',
         bookingData,
         { headers: { 'Content-Type': 'application/json' } }
       );
-
-      if (response.data.message === "Booking confirmation email sent!") {
-        toast.success('Booking confirmed! Confirmation sent to your email.');
+  
+      if (response.data.message === "Booking successful") {
+        toast.success('Booking confirmed!');
         
+        // Send booking confirmation email
+        try {
+          const emailData = {
+            name: name,
+            email: email
+          };
+          
+          await axios.post(
+            'https://quirky-backend.vercel.app/api/booking-email',
+            emailData,
+            { headers: { 'Content-Type': 'application/json' } }
+          );
+          
+          console.log('Confirmation email sent successfully');
+        } catch (emailError) {
+          console.error('Failed to send confirmation email:', emailError);
+          // Don't show error to user as booking was still successful
+        }
+  
         if (paymentMethod === 'online') {
           // Proceed to online payment
           handlePayment();
         } else {
           // For store payment, redirect after delay
           setTimeout(() => {
-            navigate('/doctor');
+            navigate('/salon');
           }, 2000);
         }
       } else {
@@ -154,7 +218,6 @@ const DoctorDetails = () => {
       toast.error(error.response?.data?.message || 'Booking failed. Please try again.');
     }
   };
-
   const handlePayment = async () => {
     const totalAmount = selectedServices.reduce((sum, service) => sum + parseFloat(service.service_price), 0);
 
