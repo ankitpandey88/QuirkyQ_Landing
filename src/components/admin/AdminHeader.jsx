@@ -5,7 +5,6 @@
 // import { FaUserCircle } from 'react-icons/fa';
 // import { AuthContext } from '../../auth/AuthContext';
 
-
 // const AdminHeader = () => {
 //   const { user, logout } = useContext(AuthContext);
 //   const navigate = useNavigate();
@@ -23,10 +22,13 @@
 //     <nav className="bg-white shadow-lg">
 //       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 //         <div className="flex justify-between h-16">
-//           <div className="flex items-center">
-//             <Link to="/dashboard" className="flex items-center">
+//           <div className="flex items-center space-x-12">
+//             <Link to="/admin-dashboard" className="flex items-center">
 //               <span className="ml-2 text-2xl font-bold text-gray-900">QuirkyQ</span>
 //             </Link>
+//             {/* Service Section */}
+//             <Link to="/admin-service" className="text-gray-800 font-medium  hover:text-purple-600">Service</Link>
+//             <Link to="/admin-booking" className="text-gray-800 font-medium  hover:text-purple-600">My Booking</Link>
 //           </div>
 //           <div className="flex items-center space-x-4">
 //             <div className="flex items-center space-x-2">
@@ -60,7 +62,13 @@ const AdminHeader = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    // Clear session storage
+    sessionStorage.clear();
+    
+    // Call the logout function from AuthContext
     logout();
+    
+    // Navigate to login page
     navigate('/admin-login');
   };
 
@@ -77,7 +85,8 @@ const AdminHeader = () => {
               <span className="ml-2 text-2xl font-bold text-gray-900">QuirkyQ</span>
             </Link>
             {/* Service Section */}
-            <Link to="/admin-service" className="text-gray-800 font-medium  hover:text-purple-600">Service</Link>
+            <Link to="/admin-service" className="text-gray-800 font-medium hover:text-purple-600">Service</Link>
+            <Link to="/admin-booking" className="text-gray-800 font-medium hover:text-purple-600">My Booking</Link>
           </div>
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">

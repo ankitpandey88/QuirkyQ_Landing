@@ -27,6 +27,7 @@ import TermsAndConditions from "./components/TerrmAndCondition";
 import ContentPolicy from "./components/ContentPolicy";
 import CancellationAndRefund from "./components/CancellationAndRefund";
 import ShippingAndDelivery from "./components/ShippingAndDelivery";
+import AdminBooking from "./components/admin/AdminBooking";
 
 
 
@@ -60,6 +61,7 @@ const App = () => {
 
             {/* ✅ Apply Protected Route to these pages */}
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/admin-booking" element={<ProtectedRoute><AdminBooking /></ProtectedRoute>} />
             {/* <Route path="/salon" element={<ProtectedRoute><Salon /></ProtectedRoute>} />
             <Route path="/salon/:id" element={<ProtectedRoute><SalonDetails /></ProtectedRoute>} />
             <Route path="/doctor" element={<ProtectedRoute><Doctor /></ProtectedRoute>} />
