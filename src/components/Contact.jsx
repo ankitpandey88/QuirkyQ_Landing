@@ -430,11 +430,11 @@ const ContactUs = () => {
               </div>
               <div className="flex items-start text-gray-300">
                 <FaEnvelope className="mt-1 mr-3 text-purple-400 flex-shrink-0" />
-                <span>support@quirkyq.com</span>
+                <span>support@quirkyq.co.in</span>
               </div>
               <div className="flex items-start text-gray-300">
                 <FaMapMarkerAlt className="mt-1 mr-3 text-purple-400 flex-shrink-0" />
-                <span>886, Shyam Nagar, Bharatpur Raj</span>
+                <span>886, Shyam Nagar, Bharatpur Raj.</span>
               </div>
             </div>
 
