@@ -467,7 +467,7 @@ const DoctorDetails = () => {
                   }`}
                   disabled={selectedServices.length === 0 || !selectedDate || !selectedTime || !name || !email}
                 >
-                  Pay Online (₹{totalAmount.toFixed(2)})
+                  Pay Online 
                 </button>
 
                 <button
@@ -480,7 +480,7 @@ const DoctorDetails = () => {
                   disabled={selectedServices.length === 0 || !selectedDate || !selectedTime || !name || !email}
                 >
                   <FaStore className="mr-2" />
-                  Pay at Store (₹{totalAmount.toFixed(2)})
+                  Pay at Store 
                 </button>
               </div>
             </div>

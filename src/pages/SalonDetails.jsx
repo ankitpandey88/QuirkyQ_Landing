@@ -773,10 +773,10 @@ const SalonDetails = () => {
                   <HiLocationMarker className="h-5 w-5 mr-1" />
                   <span className="line-clamp-1">{salon.full_address}</span>
                 </div>
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <FaPhoneAlt className="h-5 w-5 mr-1" />
                   <span>{salon.contact_number}</span>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -905,7 +905,7 @@ const SalonDetails = () => {
                   }`}
                   disabled={selectedServices.length === 0 || !selectedDate || !selectedTime || !name || !email}
                 >
-                  Pay Online (₹{totalAmount.toFixed(2)})
+                  Pay Online 
                 </button>
 
                 <button
@@ -918,7 +918,7 @@ const SalonDetails = () => {
                   disabled={selectedServices.length === 0 || !selectedDate || !selectedTime || !name || !email}
                 >
                   <FaStore className="mr-2" />
-                  Pay at Store (₹{totalAmount.toFixed(2)})
+                  Pay at Store 
                 </button>
               </div>
             </div>
