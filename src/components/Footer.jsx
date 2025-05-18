@@ -124,15 +124,7 @@ const Footer = () => {
                 +91 7014362177
               </p>
             </div>
-            {/* QR Code */}
-            <div className="mt-4">
-              <img
-                src="/image/qr.jpeg"
-                alt="QR Code"
-                className="w-32 h-32 rounded-lg border-2 border-purple-500 shadow-lg hover:scale-105 transition-transform duration-300"
-              />
-              <p className="mt-2 text-sm text-gray-400">Scan to connect with us</p>
-            </div>
+        
           </div>
 
           {/* Social Links */}
