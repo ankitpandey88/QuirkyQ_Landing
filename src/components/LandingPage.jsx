@@ -800,7 +800,7 @@ const LandingPage = () => {
 
           <button
             onClick={() => window.location.href = '/signup'}
-            className=" ml-[40rem] inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-12 py-4 rounded-full font-semibold text-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 w-64"
+            className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-12 py-4 rounded-full font-semibold text-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105 w-64 mx-auto"
           >
             Get Started
           </button>
