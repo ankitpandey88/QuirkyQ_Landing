@@ -26,6 +26,8 @@
 //   const [email, setEmail] = useState('');
 //   const [paymentMethod, setPaymentMethod] = useState('');
 //   const [showAllServices, setShowAllServices] = useState(false);
+//   const [availableSlots, setAvailableSlots] = useState([]);
+//   const [loadingSlots, setLoadingSlots] = useState(false);
 
 //   useEffect(() => {
 //     const handleScroll = () => {
@@ -35,7 +37,7 @@
 
 //     // Fetch salon details
 //     axios
-//       .get(`https://quirky-backend.vercel.app/api/vendors/${id}`)
+//       .get(` https://query-q-backend.vercel.app/api/vendors/${id}`)
 //       .then((response) => {
 //         const salonData = response.data;
 //         setSalon(salonData);
@@ -44,7 +46,7 @@
 //           // Fetch services
 //           const serviceData = JSON.stringify({ email: salonData.email });
 //           axios
-//             .post('https://quirky-backend.vercel.app/api/getVendorServicesByEmail', serviceData, {
+//             .post(' https://query-q-backend.vercel.app/api/getVendorServicesByEmail', serviceData, {
 //               headers: { 'Content-Type': 'application/json' },
 //             })
 //             .then((response) => {
@@ -55,7 +57,7 @@
 //           // Fetch subcategories
 //           const subcategoryData = JSON.stringify({ email: salonData.email });
 //           axios
-//             .post('https://quirky-backend.vercel.app/api/getSubcategoriesByEmail', subcategoryData, {
+//             .post(' https://query-q-backend.vercel.app/api/getSubcategoriesByEmail', subcategoryData, {
 //               headers: { 'Content-Type': 'application/json' },
 //               maxBodyLength: Infinity,
 //             })
@@ -74,6 +76,38 @@
 
 //     return () => window.removeEventListener('scroll', handleScroll);
 //   }, [id]);
+
+//   // Fetch available slots when date changes
+//   useEffect(() => {
+//     if (selectedDate && salon?.email) {
+//       fetchAvailableSlots();
+//     }
+//   }, [selectedDate, salon]);
+
+//   const fetchAvailableSlots = async () => {
+//     setLoadingSlots(true);
+//     setSelectedTime(''); // Reset selected time when date changes
+    
+//     try {
+//       const response = await axios.get(
+//         ` https://query-q-backend.vercel.app/api/slots/${salon.email}`
+//       );
+      
+//       // Filter slots for the selected date
+//       const selectedDateSlots = response.data.slots.filter(slot => {
+//         const slotDate = new Date(slot.date).toISOString().split('T')[0];
+//         return slotDate === selectedDate;
+//       });
+      
+//       setAvailableSlots(selectedDateSlots);
+//     } catch (error) {
+//       console.error('Error fetching slots:', error);
+//       toast.error('Failed to load available slots');
+//       setAvailableSlots([]);
+//     } finally {
+//       setLoadingSlots(false);
+//     }
+//   };
 
 //   const handleServiceSelection = (service) => {
 //     setSelectedServices((prev) =>
@@ -145,7 +179,7 @@
 
 //     try {
 //       const response = await axios.post(
-//         'https://quirky-backend.vercel.app/api/bookings-details',
+//         ' https://query-q-backend.vercel.app/api/bookings-details',
 //         bookingData,
 //         { headers: { 'Content-Type': 'application/json' } }
 //       );
@@ -160,7 +194,7 @@
 //           };
           
 //           await axios.post(
-//             'https://quirky-backend.vercel.app/api/booking-email',
+//             ' https://query-q-backend.vercel.app/api/booking-email',
 //             emailData,
 //             { headers: { 'Content-Type': 'application/json' } }
 //           );
@@ -190,7 +224,7 @@
 //     const totalAmount = selectedServices.reduce((sum, service) => sum + parseFloat(service.service_price), 0);
 
 //     try {
-//       const { data } = await axios.post('https://quirky-backend.vercel.app/api/payment/create-order', {
+//       const { data } = await axios.post(' https://query-q-backend.vercel.app/api/payment/create-order', {
 //         amount: totalAmount * 100,
 //         currency: 'INR'
 //       });
@@ -214,7 +248,7 @@
 //           };
 
 //           try {
-//             const result = await axios.post('https://quirky-backend.vercel.app/api/payment/verify-payment', body);
+//             const result = await axios.post(' https://query-q-backend.vercel.app/api/payment/verify-payment', body);
 //             if (result.data.success) {
 //               toast.success('Payment Successful!');
 //               setTimeout(() => {
@@ -411,22 +445,31 @@
 
 //               <div className="mb-6">
 //                 <label className="block text-sm font-medium text-gray-300 mb-2">Time Slot</label>
-//                 <select
-//                   className="w-full px-4 py-2 bg-gray-700 text-gray-200 border border-gray-600 rounded-full focus:ring-2 focus:ring-purple-500 focus:outline-none transition-all duration-300"
-//                   value={selectedTime}
-//                   onChange={(e) => setSelectedTime(e.target.value)}
-//                 >
-//                   <option value="">Select a time</option>
-//                   <option value="09:00">9:00 AM</option>
-//                   <option value="10:00">10:00 AM</option>
-//                   <option value="11:00">11:00 AM</option>
-//                   <option value="12:00">12:00 PM</option>
-//                   <option value="13:00">1:00 PM</option>
-//                   <option value="14:00">2:00 PM</option>
-//                   <option value="15:00">3:00 PM</option>
-//                   <option value="16:00">4:00 PM</option>
-//                   <option value="17:00">5:00 PM</option>
-//                 </select>
+//                 {loadingSlots ? (
+//                   <div className="flex justify-center py-4">
+//                     <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-purple-400"></div>
+//                   </div>
+//                 ) : availableSlots.length > 0 ? (
+//                   <div className="grid grid-cols-2 gap-2">
+//                     {availableSlots.map((slot) => (
+//                       <button
+//                         key={`${slot.date}-${slot.time}`}
+//                         onClick={() => setSelectedTime(slot.time)}
+//                         className={`py-2 px-3 rounded-full text-sm transition-all duration-200 ${
+//                           selectedTime === slot.time
+//                             ? 'bg-purple-600 text-white'
+//                             : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
+//                         }`}
+//                       >
+//                         {slot.time}
+//                       </button>
+//                     ))}
+//                   </div>
+//                 ) : selectedDate ? (
+//                   <p className="text-gray-400 text-sm">No available slots for this date</p>
+//                 ) : (
+//                   <p className="text-gray-400 text-sm">Please select a date first</p>
+//                 )}
 //               </div>
 
 //               {selectedServices.length > 0 && (
@@ -500,8 +543,7 @@ const SalonDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [salon, setSalon] = useState(null);
-  const [services, setServices] = useState([]);
-  const [subcategories, setSubcategories] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
@@ -513,6 +555,7 @@ const SalonDetails = () => {
   const [showAllServices, setShowAllServices] = useState(false);
   const [availableSlots, setAvailableSlots] = useState([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
+  const [expandedCategory, setExpandedCategory] = useState(null); // Track expanded category
 
   useEffect(() => {
     const handleScroll = () => {
@@ -522,40 +565,27 @@ const SalonDetails = () => {
 
     // Fetch salon details
     axios
-      .get(`https://quirky-backend.vercel.app/api/vendors/${id}`)
+      .get(`https://query-q-backend.vercel.app/api/vendors/${id}`)
       .then((response) => {
         const salonData = response.data;
         setSalon(salonData);
 
-        if (salonData.email) {
-          // Fetch services
-          const serviceData = JSON.stringify({ email: salonData.email });
-          axios
-            .post('https://quirky-backend.vercel.app/api/getVendorServicesByEmail', serviceData, {
-              headers: { 'Content-Type': 'application/json' },
-            })
-            .then((response) => {
-              setServices(response.data.services || []);
-            })
-            .catch((error) => console.error('Error fetching services:', error));
-
-          // Fetch subcategories
-          const subcategoryData = JSON.stringify({ email: salonData.email });
-          axios
-            .post('https://quirky-backend.vercel.app/api/getSubcategoriesByEmail', subcategoryData, {
-              headers: { 'Content-Type': 'application/json' },
-              maxBodyLength: Infinity,
-            })
-            .then((response) => {
-              setSubcategories(response.data.subcategories || []);
-            })
-            .catch((error) => console.error('Error fetching subcategories:', error));
-        } else {
-          console.error('Email not found in salon data');
-        }
+        // Fetch categories and subcategories
+        axios
+          .get(`https://query-q-backend.vercel.app/api/getServiceCategry?vendor_id=${id}`, {
+            headers: { 'Content-Type': 'application/json' },
+          })
+          .then((response) => {
+            setCategories(response.data.services_by_category || []);
+          })
+          .catch((error) => {
+            console.error('Error fetching categories and subcategories:', error);
+            toast.error('Failed to load services');
+          });
       })
       .catch((error) => {
         console.error('Error fetching salon:', error);
+        toast.error('Failed to load salon details');
       })
       .finally(() => setLoading(false));
 
@@ -571,19 +601,15 @@ const SalonDetails = () => {
 
   const fetchAvailableSlots = async () => {
     setLoadingSlots(true);
-    setSelectedTime(''); // Reset selected time when date changes
-    
+    setSelectedTime('');
     try {
       const response = await axios.get(
-        `https://quirky-backend.vercel.app/api/slots/${salon.email}`
+        `https://query-q-backend.vercel.app/api/slots/${salon.email}`
       );
-      
-      // Filter slots for the selected date
-      const selectedDateSlots = response.data.slots.filter(slot => {
+      const selectedDateSlots = response.data.slots.filter((slot) => {
         const slotDate = new Date(slot.date).toISOString().split('T')[0];
         return slotDate === selectedDate;
       });
-      
       setAvailableSlots(selectedDateSlots);
     } catch (error) {
       console.error('Error fetching slots:', error);
@@ -594,12 +620,23 @@ const SalonDetails = () => {
     }
   };
 
-  const handleServiceSelection = (service) => {
+  const handleServiceSelection = (subcategory) => {
     setSelectedServices((prev) =>
-      prev.some((s) => s.service_name === service.service_name)
-        ? prev.filter((s) => s.service_name !== service.service_name)
-        : [...prev, service]
+      prev.some((s) => s.id === subcategory.id)
+        ? prev.filter((s) => s.id !== subcategory.id)
+        : [
+            ...prev,
+            {
+              id: subcategory.id,
+              service_name: subcategory.subcategory,
+              service_price: subcategory.price,
+            },
+          ]
     );
+  };
+
+  const toggleCategory = (category) => {
+    setExpandedCategory(expandedCategory === category ? null : category);
   };
 
   const getMinDate = () => {
@@ -656,34 +693,28 @@ const SalonDetails = () => {
       time: selectedTime,
       paymentMethod: paymentMethod,
       totalAmount: totalAmount,
-      services: selectedServices.map(service => ({
+      services: selectedServices.map((service) => ({
         name: service.service_name,
-        price: service.service_price
-      }))
+        price: service.service_price,
+      })),
     };
 
     try {
       const response = await axios.post(
-        'https://quirky-backend.vercel.app/api/bookings-details',
+        'https://query-q-backend.vercel.app/api/bookings-details',
         bookingData,
         { headers: { 'Content-Type': 'application/json' } }
       );
 
-      if (response.data.message === "Booking successful") {
+      if (response.data.message === 'Booking successful') {
         toast.success('Booking confirmed!');
-        
         try {
-          const emailData = {
-            name: name,
-            email: email
-          };
-          
+          const emailData = { name: name, email: email };
           await axios.post(
-            'https://quirky-backend.vercel.app/api/booking-email',
+            'https://query-q-backend.vercel.app/api/booking-email',
             emailData,
             { headers: { 'Content-Type': 'application/json' } }
           );
-          
           console.log('Confirmation email sent successfully');
         } catch (emailError) {
           console.error('Failed to send confirmation email:', emailError);
@@ -709,9 +740,9 @@ const SalonDetails = () => {
     const totalAmount = selectedServices.reduce((sum, service) => sum + parseFloat(service.service_price), 0);
 
     try {
-      const { data } = await axios.post('https://quirky-backend.vercel.app/api/payment/create-order', {
+      const { data } = await axios.post('https://query-q-backend.vercel.app/api/payment/create-order', {
         amount: totalAmount * 100,
-        currency: 'INR'
+        currency: 'INR',
       });
 
       const options = {
@@ -721,19 +752,16 @@ const SalonDetails = () => {
         name: salon.enterprise_name,
         description: 'Payment for salon services',
         order_id: data.id,
-        prefill: {
-          name: name,
-          email: email,
-        },
+        prefill: { name: name, email: email },
         handler: async (response) => {
           const body = {
             order_id: data.id,
             payment_id: response.razorpay_payment_id,
-            signature: response.razorpay_signature
+            signature: response.razorpay_signature,
           };
 
           try {
-            const result = await axios.post('https://quirky-backend.vercel.app/api/payment/verify-payment', body);
+            const result = await axios.post('https://query-q-backend.vercel.app/api/payment/verify-payment', body);
             if (result.data.success) {
               toast.success('Payment Successful!');
               setTimeout(() => {
@@ -747,9 +775,7 @@ const SalonDetails = () => {
             toast.error('Payment verification failed');
           }
         },
-        theme: {
-          color: '#3399cc'
-        }
+        theme: { color: '#3399cc' },
       };
 
       const razorpay = new window.Razorpay(options);
@@ -784,7 +810,6 @@ const SalonDetails = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
       <Toaster position="top-right" reverseOrder={false} />
-      
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
           isScrolled ? 'bg-gray-900 shadow-2xl' : 'bg-transparent'
@@ -801,13 +826,11 @@ const SalonDetails = () => {
           >
             <FaArrowLeft className="mr-2" /> Back
           </button>
-
           <img
             src={salon.exterior_image || 'https://via.placeholder.com/800x400'}
             alt={salon.enterprise_name}
             className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
           />
-
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-70 flex items-end">
             <div className="p-8">
               <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-3 animate-slide-up">
@@ -832,45 +855,41 @@ const SalonDetails = () => {
           <p className="text-gray-300">{salon.personal_intro || 'No description available'}</p>
         </div>
 
-        <div className="bg-gray-800 p-6 rounded-3xl shadow-lg mb-10">
-          <h2 className="text-2xl font-bold text-white mb-4 animate-fade-in">Subcategories</h2>
-          <div className="flex flex-wrap gap-4">
-            {subcategories.length > 0 ? (
-              subcategories.map((subcategory) => (
-                <span
-                  key={subcategory.id}
-                  className="px-4 py-2 bg-gradient-to-br from-purple-600 to-purple-700 text-white rounded-full text-sm font-medium"
-                >
-                  {subcategory.subcategory_name}
-                </span>
-              ))
-            ) : (
-              <p className="text-gray-300">No subcategories available at the moment.</p>
-            )}
-          </div>
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2">
             <h2 className="text-2xl font-bold text-white mb-6 animate-fade-in">Services</h2>
             <div className="space-y-5">
-              {services.length > 0 ? (
-                (showAllServices ? services : services.slice(0, 6)).map((service) => (
-                  <div
-                    key={service.service_name}
-                    className={`p-5 rounded-3xl shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl ${
-                      selectedServices.some((s) => s.service_name === service.service_name)
-                        ? 'bg-gradient-to-br from-purple-600 to-purple-700 scale-105'
-                        : 'bg-gradient-to-br from-gray-700 to-indigo-700 hover:bg-gray-600'
-                    }`}
-                    onClick={() => handleServiceSelection(service)}
-                  >
-                    <div className="flex justify-between items-center">
-                      <h3 className="text-lg font-semibold text-white">{service.service_name}</h3>
-                      <div className="text-lg font-semibold text-gray-200">₹{service.service_price}</div>
+              {categories.length > 0 ? (
+                (showAllServices ? categories : categories.slice(0, 6)).map((category) => (
+                  <div key={category.category} className="bg-gradient-to-br from-gray-700 to-indigo-700 p-5 rounded-3xl shadow-lg">
+                    <div
+                      className="flex justify-between items-center cursor-pointer"
+                      onClick={() => toggleCategory(category.category)}
+                    >
+                      <h3 className="text-lg font-semibold text-white">{category.category}</h3>
+                      <span className="text-gray-200">
+                        {expandedCategory === category.category ? '−' : '+'}
+                      </span>
                     </div>
-                    {service.service_description && (
-                      <p className="text-gray-300 mt-2 text-sm">{service.service_description}</p>
+                    {expandedCategory === category.category && (
+                      <div className="mt-4 space-y-3">
+                        {category.subcategories.map((subcategory) => (
+                          <div
+                            key={subcategory.id}
+                            className={`p-4 rounded-2xl cursor-pointer transition-all duration-300 hover:shadow-xl ${
+                              selectedServices.some((s) => s.id === subcategory.id)
+                                ? 'bg-gradient-to-br from-purple-600 to-purple-700 scale-105'
+                                : 'bg-gray-600 hover:bg-gray-500'
+                            }`}
+                            onClick={() => handleServiceSelection(subcategory)}
+                          >
+                            <div className="flex justify-between items-center">
+                              <h4 className="text-md font-medium text-white">{subcategory.subcategory}</h4>
+                              <div className="text-md font-semibold text-gray-200">₹{subcategory.price}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     )}
                   </div>
                 ))
@@ -878,7 +897,7 @@ const SalonDetails = () => {
                 <p className="text-gray-300">No services available at the moment.</p>
               )}
             </div>
-            {services.length > 6 && !showAllServices && (
+            {categories.length > 6 && !showAllServices && (
               <button
                 onClick={() => setShowAllServices(true)}
                 className="mt-6 px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-medium transition-all duration-300"
@@ -891,7 +910,6 @@ const SalonDetails = () => {
           <div className="lg:col-span-1">
             <div className="bg-gray-800 p-6 rounded-3xl shadow-lg sticky top-28">
               <h2 className="text-xl font-bold text-white mb-5 animate-fade-in">Book Appointment</h2>
-
               <div className="mb-5">
                 <label className="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
                 <input
@@ -902,7 +920,6 @@ const SalonDetails = () => {
                   placeholder="Your full name"
                 />
               </div>
-
               <div className="mb-5">
                 <label className="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
                 <input
@@ -913,7 +930,6 @@ const SalonDetails = () => {
                   placeholder="your@email.com"
                 />
               </div>
-
               <div className="mb-5">
                 <label className="block text-sm font-medium text-gray-300 mb-2">Appointment Date</label>
                 <div className="relative">
@@ -927,7 +943,6 @@ const SalonDetails = () => {
                   />
                 </div>
               </div>
-
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-300 mb-2">Time Slot</label>
                 {loadingSlots ? (
@@ -956,13 +971,12 @@ const SalonDetails = () => {
                   <p className="text-gray-400 text-sm">Please select a date first</p>
                 )}
               </div>
-
               {selectedServices.length > 0 && (
                 <div className="mb-6 p-4 bg-gray-700 rounded-2xl">
                   <h3 className="text-lg font-semibold text-white mb-3">Booking Summary</h3>
                   <div className="space-y-2 text-sm text-gray-300">
                     {selectedServices.map((service) => (
-                      <div key={service.service_name} className="flex justify-between">
+                      <div key={service.id} className="flex justify-between">
                         <span>{service.service_name}</span>
                         <span className="font-medium">₹{service.service_price}</span>
                       </div>
@@ -974,7 +988,6 @@ const SalonDetails = () => {
                   </div>
                 </div>
               )}
-
               <div className="flex flex-col space-y-4">
                 <button
                   onClick={handleOnlinePayment}
@@ -987,7 +1000,6 @@ const SalonDetails = () => {
                 >
                   Pay Online
                 </button>
-
                 <button
                   onClick={handlePayAtStore}
                   className={`w-full py-3 px-4 rounded-full text-white font-medium transition-all duration-300 shadow-md flex items-center justify-center ${
@@ -1005,7 +1017,6 @@ const SalonDetails = () => {
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   );

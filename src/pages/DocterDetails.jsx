@@ -30,7 +30,7 @@
 //     window.addEventListener('scroll', handleScroll);
 
 //     axios
-//       .get(`https://quirky-backend.vercel.app/api/vendors/${id}`)
+//       .get(` https://query-q-backend.vercel.app/api/vendors/${id}`)
 //       .then((response) => {
 //         const doctorData = response.data;
 //         setDoctor(doctorData);
@@ -38,7 +38,7 @@
 //         if (doctorData.email) {
 //           const data = JSON.stringify({ email: doctorData.email });
 //           axios
-//             .post('https://quirky-backend.vercel.app/api/getVendorServicesByEmail', data, {
+//             .post(' https://query-q-backend.vercel.app/api/getVendorServicesByEmail', data, {
 //               headers: { 'Content-Type': 'application/json' },
 //             })
 //             .then((response) => {
@@ -129,7 +129,7 @@
 
 //   //   try {
 //   //     const response = await axios.post(
-//   //       'https://quirky-backend.vercel.app/api/booking-email',
+//   //       ' https://query-q-backend.vercel.app/api/booking-email',
 //   //       bookingData,
 //   //       { headers: { 'Content-Type': 'application/json' } }
 //   //     );
@@ -174,7 +174,7 @@
   
 //     try {
 //       const response = await axios.post(
-//         'https://quirky-backend.vercel.app/api/doctor-bookings-details',
+//         ' https://query-q-backend.vercel.app/api/doctor-bookings-details',
 //         bookingData,
 //         { headers: { 'Content-Type': 'application/json' } }
 //       );
@@ -190,7 +190,7 @@
 //           };
           
 //           await axios.post(
-//             'https://quirky-backend.vercel.app/api/booking-email',
+//             ' https://query-q-backend.vercel.app/api/booking-email',
 //             emailData,
 //             { headers: { 'Content-Type': 'application/json' } }
 //           );
@@ -222,7 +222,7 @@
 //     const totalAmount = selectedServices.reduce((sum, service) => sum + parseFloat(service.service_price), 0);
 
 //     try {
-//       const { data } = await axios.post('https://quirky-backend.vercel.app/api/payment/create-order', {
+//       const { data } = await axios.post(' https://query-q-backend.vercel.app/api/payment/create-order', {
 //         amount: totalAmount * 100,
 //         currency: 'INR'
 //       });
@@ -246,7 +246,7 @@
 //           };
 
 //           try {
-//             const result = await axios.post('https://quirky-backend.vercel.app/api/payment/verify-payment', body);
+//             const result = await axios.post(' https://query-q-backend.vercel.app/api/payment/verify-payment', body);
 //             if (result.data.success) {
 //               toast.success('Payment Successful!');
 //               setTimeout(() => {
@@ -527,7 +527,7 @@ const DoctorDetails = () => {
     window.addEventListener('scroll', handleScroll);
 
     axios
-      .get(`https://quirky-backend.vercel.app/api/vendors/${id}`)
+      .get(` https://query-q-backend.vercel.app/api/vendors/${id}`)
       .then((response) => {
         const doctorData = response.data;
         setDoctor(doctorData);
@@ -535,7 +535,7 @@ const DoctorDetails = () => {
         if (doctorData.email) {
           const data = JSON.stringify({ email: doctorData.email });
           axios
-            .post('https://quirky-backend.vercel.app/api/getVendorServicesByEmail', data, {
+            .post(' https://query-q-backend.vercel.app/api/getVendorServicesByEmail', data, {
               headers: { 'Content-Type': 'application/json' },
             })
             .then((response) => {
@@ -569,7 +569,7 @@ const DoctorDetails = () => {
     
     try {
       const response = await axios.get(
-        `https://quirky-backend.vercel.app/api/slots/${doctor.email}`
+        ` https://query-q-backend.vercel.app/api/slots/${doctor.email}`
       );
       
       // Filter slots for the selected date
@@ -658,7 +658,7 @@ const DoctorDetails = () => {
 
     try {
       const response = await axios.post(
-        'https://quirky-backend.vercel.app/api/doctor-bookings-details',
+        ' https://query-q-backend.vercel.app/api/doctor-bookings-details',
         bookingData,
         { headers: { 'Content-Type': 'application/json' } }
       );
@@ -673,7 +673,7 @@ const DoctorDetails = () => {
           };
           
           await axios.post(
-            'https://quirky-backend.vercel.app/api/booking-email',
+            ' https://query-q-backend.vercel.app/api/booking-email',
             emailData,
             { headers: { 'Content-Type': 'application/json' } }
           );
@@ -703,7 +703,7 @@ const DoctorDetails = () => {
     const totalAmount = selectedServices.reduce((sum, service) => sum + parseFloat(service.service_price), 0);
 
     try {
-      const { data } = await axios.post('https://quirky-backend.vercel.app/api/payment/create-order', {
+      const { data } = await axios.post(' https://query-q-backend.vercel.app/api/payment/create-order', {
         amount: totalAmount * 100,
         currency: 'INR'
       });
@@ -727,7 +727,7 @@ const DoctorDetails = () => {
           };
 
           try {
-            const result = await axios.post('https://quirky-backend.vercel.app/api/payment/verify-payment', body);
+            const result = await axios.post(' https://query-q-backend.vercel.app/api/payment/verify-payment', body);
             if (result.data.success) {
               toast.success('Payment Successful!');
               setTimeout(() => {

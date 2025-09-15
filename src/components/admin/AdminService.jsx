@@ -20,7 +20,7 @@
 //     if (!email) return;
 
 //     axios
-//       .post('https://quirky-backend.vercel.app/api/getVendorServicesByEmail', { email })
+//       .post(' https://query-q-backend.vercel.app/api/getVendorServicesByEmail', { email })
 //       .then((response) => {
 //         setServices(response.data.services || []);
 //         setLoading(false);
@@ -65,7 +65,7 @@
 //     };
 
 //     try {
-//       const response = await axios.post('https://quirky-backend.vercel.app/api/addVendorServices', data, {
+//       const response = await axios.post(' https://query-q-backend.vercel.app/api/addVendorServices', data, {
 //         headers: { 'Content-Type': 'application/json' },
 //       });
 //       toast.success(response.data.message);
@@ -96,7 +96,7 @@
 //     };
 
 //     try {
-//       const response = await axios.post('https://quirky-backend.vercel.app/api/addSubcategory', data, {
+//       const response = await axios.post(' https://query-q-backend.vercel.app/api/addSubcategory', data, {
 //         headers: { 'Content-Type': 'application/json' },
 //         maxBodyLength: Infinity,
 //       });
@@ -122,7 +122,7 @@
 
 //     try {
 //       const data = { email, service_name: serviceToDelete };
-//       const response = await axios.post('https://quirky-backend.vercel.app/api/deleteVendorServices', data, {
+//       const response = await axios.post(' https://query-q-backend.vercel.app/api/deleteVendorServices', data, {
 //         headers: { 'Content-Type': 'application/json' },
 //       });
 //       toast.success(response.data.message);
@@ -308,7 +308,7 @@ const AdminService = () => {
 
     // Fetch services
     axios
-      .post('https://quirky-backend.vercel.app/api/getVendorServicesByEmail', { email })
+      .post(' https://query-q-backend.vercel.app/api/getVendorServicesByEmail', { email })
       .then((response) => {
         setServices(response.data.services || []);
         setLoading(false);
@@ -327,7 +327,7 @@ const AdminService = () => {
     
     setLoadingSlots(true);
     axios
-      .get(`https://quirky-backend.vercel.app/api/slots/${email}`)
+      .get(` https://query-q-backend.vercel.app/api/slots/${email}`)
       .then((response) => {
         setSlots(response.data.slots || []);
         setLoadingSlots(false);
@@ -381,7 +381,7 @@ const AdminService = () => {
     };
 
     try {
-      const response = await axios.post('https://quirky-backend.vercel.app/api/addVendorServices', data, {
+      const response = await axios.post(' https://query-q-backend.vercel.app/api/addVendorServices', data, {
         headers: { 'Content-Type': 'application/json' },
       });
       toast.success(response.data.message);
@@ -411,7 +411,7 @@ const AdminService = () => {
         time: newSlot.time
       };
 
-      const response = await axios.post('https://quirky-backend.vercel.app/api/create-slot', data, {
+      const response = await axios.post(' https://query-q-backend.vercel.app/api/create-slot', data, {
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -431,7 +431,7 @@ const AdminService = () => {
     }
 
     try {
-      const response = await axios.delete(`https://quirky-backend.vercel.app/api/slots/${slotId}`, {
+      const response = await axios.delete(` https://query-q-backend.vercel.app/api/slots/${slotId}`, {
         headers: { 'Content-Type': 'application/json' },
       });
       toast.success(response.data.message);
@@ -460,7 +460,7 @@ const AdminService = () => {
     };
 
     try {
-      const response = await axios.post('https://quirky-backend.vercel.app/api/addSubcategory', data, {
+      const response = await axios.post(' https://query-q-backend.vercel.app/api/addSubcategory', data, {
         headers: { 'Content-Type': 'application/json' },
         maxBodyLength: Infinity,
       });
@@ -486,7 +486,7 @@ const AdminService = () => {
 
     try {
       const data = { email, service_name: serviceToDelete };
-      const response = await axios.post('https://quirky-backend.vercel.app/api/deleteVendorServices', data, {
+      const response = await axios.post(' https://query-q-backend.vercel.app/api/deleteVendorServices', data, {
         headers: { 'Content-Type': 'application/json' },
       });
       toast.success(response.data.message);

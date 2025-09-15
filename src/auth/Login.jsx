@@ -23,7 +23,7 @@
 
 //     try {
 //       const response = await axios.post(
-//         "https://quirky-backend.vercel.app/api/users/login",
+//         " https://query-q-backend.vercel.app/api/users/login",
 //         { email, password },
 //         { headers: { "Content-Type": "application/json" } }
 //       );
@@ -142,7 +142,7 @@
 
 //     try {
 //       const response = await axios.post(
-//         "https://quirky-backend.vercel.app/api/users/login",
+//         " https://query-q-backend.vercel.app/api/users/login",
 //         { email, password },
 //         { headers: { "Content-Type": "application/json" } }
 //       );
@@ -296,7 +296,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://quirky-backend.vercel.app/api/users/login",
+        " https://query-q-backend.vercel.app/api/users/login",
         loginData,
         { headers: { "Content-Type": "application/json" } }
       );
@@ -344,7 +344,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://quirky-backend.vercel.app/api/users/forgot-password",
+        " https://query-q-backend.vercel.app/api/users/forgot-password",
         forgotData,
         { headers: { "Content-Type": "application/json" } }
       );
@@ -381,7 +381,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://quirky-backend.vercel.app/api/users/reset-password",
+        " https://query-q-backend.vercel.app/api/users/reset-password",
         resetData,
         { headers: { "Content-Type": "application/json" } }
       );

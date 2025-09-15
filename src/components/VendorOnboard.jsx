@@ -27,7 +27,7 @@
 //       const config = {
 //         method: 'get',
 //         maxBodyLength: Infinity,
-//         url: `https://quirky-backend.vercel.app/api/address?pincode=${pincode}`,
+//         url: ` https://query-q-backend.vercel.app/api/address?pincode=${pincode}`,
 //         headers: { 'Content-Type': 'application/json' },
 //       };
 
@@ -75,7 +75,7 @@
 //     };
 
 //     try {
-//       const response = await axios.post('https://quirky-backend.vercel.app/api/register', formData, {
+//       const response = await axios.post(' https://query-q-backend.vercel.app/api/register', formData, {
 //         headers: { 'Content-Type': 'application/json' },
 //       });
 //       toast.success('Registration successful!');
@@ -425,7 +425,7 @@
 //   const fetchAddressData = async (pincode) => {
 //     if (!pincode || pincode.length !== 6) return;
 //     try {
-//       const response = await axios.get(`https://quirky-backend.vercel.app/api/address?pincode=${pincode}`, {
+//       const response = await axios.get(` https://query-q-backend.vercel.app/api/address?pincode=${pincode}`, {
 //         headers: { 'Content-Type': 'application/json' },
 //       });
 //       const data = response.data[0];
@@ -468,7 +468,7 @@
 //     };
 
 //     try {
-//       const response = await axios.post('https://quirky-backend.vercel.app/api/vendor/register', formData, {
+//       const response = await axios.post(' https://query-q-backend.vercel.app/api/vendor/register', formData, {
 //         headers: { 'Content-Type': 'application/json' },
 //       });
 //       toast.success('OTP sent to your email!');
@@ -488,7 +488,7 @@
 //     setLoading(true);
     
 //     try {
-//       const response = await axios.post('https://quirky-backend.vercel.app/api/vendor/verify-otp', {
+//       const response = await axios.post(' https://query-q-backend.vercel.app/api/vendor/verify-otp', {
 //         email: registrationData.email,
 //         otp: otp
 //       }, {
@@ -837,7 +837,7 @@ const Onboarding = () => {
   const fetchAddressData = async (pincode) => {
     if (!pincode || pincode.length !== 6) return;
     try {
-      const response = await axios.get(`https://quirky-backend.vercel.app/api/address?pincode=${pincode}`, {
+      const response = await axios.get(` https://query-q-backend.vercel.app/api/address?pincode=${pincode}`, {
         headers: { 'Content-Type': 'application/json' },
       });
       const data = response.data[0];
@@ -880,7 +880,7 @@ const Onboarding = () => {
     };
 
     try {
-      const response = await axios.post('https://quirky-backend.vercel.app/api/vendor/register', formData, {
+      const response = await axios.post(' https://query-q-backend.vercel.app/api/vendor/register', formData, {
         headers: { 'Content-Type': 'application/json' },
       });
       toast.success('OTP sent to your email!');
@@ -900,7 +900,7 @@ const Onboarding = () => {
     setLoading(true);
     
     try {
-      const response = await axios.post('https://quirky-backend.vercel.app/api/vendor/verify-otp', {
+      const response = await axios.post(' https://query-q-backend.vercel.app/api/vendor/verify-otp', {
         email: registrationData.email,
         otp: otp
       }, {

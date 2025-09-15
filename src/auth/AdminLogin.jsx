@@ -35,7 +35,7 @@ const AdminLogin = () => {
 
   //   try {
   //     const response = await axios.post(
-  //       "https://quirky-backend.vercel.app/api/admin/login",
+  //       " https://query-q-backend.vercel.app/api/admin/login",
   //       loginData,
   //       { headers: { "Content-Type": "application/json" } }
   //     );
@@ -76,7 +76,7 @@ const AdminLogin = () => {
   
     try {
       const response = await axios.post(
-        "https://quirky-backend.vercel.app/api/admin/login",
+        " https://query-q-backend.vercel.app/api/admin/login",
         loginData,
         { headers: { "Content-Type": "application/json" } }
       );

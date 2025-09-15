@@ -74,7 +74,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        'https://quirky-backend.vercel.app/api/users/send-otp',
+        ' https://query-q-backend.vercel.app/api/users/send-otp',
         userData,
         { headers: { 'Content-Type': 'application/json' } }
       );
@@ -112,7 +112,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        'https://quirky-backend.vercel.app/api/users/verify-otp',
+        ' https://query-q-backend.vercel.app/api/users/verify-otp',
         otpData,
         { headers: { 'Content-Type': 'application/json' } }
       );

@@ -16,7 +16,7 @@ const Approval = () => {
     const fetchVendors = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get('https://quirky-backend.vercel.app/api/admin/vendors');
+        const response = await axios.get(' https://query-q-backend.vercel.app/api/admin/vendors');
         setVendors(response.data);
       } catch (error) {
         console.error("Error fetching vendors:", error);
@@ -32,7 +32,7 @@ const Approval = () => {
   const handleApprove = async (id) => {
     setActionLoading(true);
     try {
-      await axios.post(`https://quirky-backend.vercel.app/api/admin/approve-vendor/${id}`);
+      await axios.post(` https://query-q-backend.vercel.app/api/admin/approve-vendor/${id}`);
       toast.success('✅ Vendor approved successfully!');
       setSelectedVendor(prev => ({ ...prev, status: "approved" }));
     } catch (error) {
@@ -47,7 +47,7 @@ const Approval = () => {
   const handleReject = async (id) => {
     setActionLoading(true);
     try {
-      await axios.post(`https://quirky-backend.vercel.app/api/admin/reject-vendor/${id}`);
+      await axios.post(` https://query-q-backend.vercel.app/api/admin/reject-vendor/${id}`);
       toast.warning('⚠️ Vendor rejected.');
       setSelectedVendor(prev => ({ ...prev, status: "rejected" }));
     } catch (error) {

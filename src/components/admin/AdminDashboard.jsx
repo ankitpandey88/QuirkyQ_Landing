@@ -32,7 +32,7 @@ const AdminDashboard = () => {
         const config = {
           method: 'get',
           maxBodyLength: Infinity,
-          url: `https://quirky-backend.vercel.app/api/vendors/${userId}`,
+          url: ` https://query-q-backend.vercel.app/api/vendors/${userId}`,
           headers: { 
             'Content-Type': 'application/json'
           }
@@ -63,7 +63,7 @@ const AdminDashboard = () => {
       const config = {
         method: 'put',
         maxBodyLength: Infinity,
-        url: `https://quirky-backend.vercel.app/api/admin/update-vendor/${userId}`,
+        url: ` https://query-q-backend.vercel.app/api/admin/update-vendor/${userId}`,
         headers: { 
           'Content-Type': 'application/json'
         },

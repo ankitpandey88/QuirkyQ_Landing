@@ -38,9 +38,9 @@ const AdminBooking = () => {
 
         let apiUrl
         if (serviceType === 'Doctor') {
-          apiUrl = `https://quirky-backend.vercel.app/api/doctor-bookings/${vendorId}`
+          apiUrl = ` https://query-q-backend.vercel.app/api/doctor-bookings/${vendorId}`
         } else if (serviceType === 'Salon') {
-          apiUrl = `https://quirky-backend.vercel.app/api/bookings/salon/${vendorId}`
+          apiUrl = ` https://query-q-backend.vercel.app/api/bookings/salon/${vendorId}`
         } else {
           toast.error('Invalid service type')
           setLoading(false)

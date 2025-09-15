@@ -17,7 +17,7 @@
 
 //   useEffect(() => {
 //     axios
-//       .get('https://quirky-backend.vercel.app/api/admin/vendors', {
+//       .get(' https://query-q-backend.vercel.app/api/admin/vendors', {
 //         headers: { 'Content-Type': 'application/json' },
 //       })
 //       .then((response) => {
@@ -147,7 +147,7 @@ const Doctor = () => {
     window.addEventListener('scroll', handleScroll);
 
     axios
-      .get('https://quirky-backend.vercel.app/api/admin/vendors', {
+      .get(' https://query-q-backend.vercel.app/api/admin/vendors', {
         headers: { 'Content-Type': 'application/json' },
       })
       .then((response) => {
